@@ -14,18 +14,22 @@ function [ retVal, vec1, vec2, xVec, pVec, sizeX, sizeP ] = dimensionCheck( vec1
     if (min(sizeXVec) ~= 1)
         disp('xVec is not a vector!');
         retVal = false;
+        return;
     end;
     if (min(sizePVec) ~= 1)
         disp('pVec is not a vector!');
         retVal = false;
+        return;
     end;
     if (min(sizeVec1) ~= 1)
         disp('vec1 is not a vector!');
         retVal = false;
+        return;
     end;
     if (min(sizeVec2) ~= 1)
         disp('vec2 is not a vector!');
         retVal = false;
+        return;
     end;
     if (sizeXVec(1) == 1)
         xVec = xVec';
@@ -47,48 +51,58 @@ function [ retVal, vec1, vec2, xVec, pVec, sizeX, sizeP ] = dimensionCheck( vec1
     if (sizeA(1) ~= sizeA(2))
         disp('A is not square!');
         retVal = false;
+        return;
     end;
     if (sizeXMat(1) ~= sizeXMat(2))
         disp('xMat is not square!');
         retVal = false;
+        return;
     end;
     if (sizePMat(1) ~= sizePMat(2))
         disp('pMat is not square!');
         retVal = false;
+        return;
     end;
     % X dimension check
     if ( sizeX ~= sizeA(1))
         disp('Sizes of A and xVec do not agree!');
         retVal = false;
+        return;
     end;
     if ( sizeX ~= sizeXMat(1))
         disp('Sizes of xMat and xVec do not agree!');
         retVal = false;
+        return;
     end;
     % P dimension check
     if ( sizeP ~= sizePMat(1))
         disp('Sizes of pMat and pVec do not agree!');
         retVal = false;
+        return;
     end;
 
     % matrix B dimension check
     if (sizeB(1) ~= sizeX)
         disp('Sizes of B and A do not agree!');
         retVal = false;
+        return;
     end;
     if (sizeB(2) ~= sizeP)
         disp('Sizes of B and pVec do not agree!');
         retVal = false;
+        return;
     end;
 
     % vec1 and vec2 dimension checks
     if (sizeVec1 ~= sizeX)
         disp('Sizes of vec1 and xVec do not agree!');
         retVal = false;
+        return;
     end;
     if (sizeVec2 ~= sizeX)
         disp('Sizes of vec2 and xVec do not agree!');
         retVal = false;
+        return;
     end;
 end
 
