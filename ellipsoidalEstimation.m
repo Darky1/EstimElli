@@ -22,26 +22,6 @@ function [ output_args ] = ellipsoidalEstimation(mode, precision, tEst, vec1, ve
 %   pVec(t), pMat(t) - equation parameters, determing dynamic ellipsoid 
 %       E(pVec(t), pMat(t)) for control limits.
 %   ellipsoidalEstimation(mode, tEst, vec1, vec2, n, A, B, xVec, xMat, pVec, pMat)    
-    
-%mode check
-    switch mode
-        case {'2d'}
-            tEst = tEst(1);
-            %2d proj func
-            Estimation2d( precision, tEst, vec1, vec2, n, ...
-                A, B, xVec, xMat, pVec, pMat )
-            disp('2d');
-        case {'static3d'}
-            disp('static3d');
-            %static 3d proj func
-        case {'dynamic3d'}
-            disp('dynamic3d');
-            %dynamic 3d 
-        otherwise
-            disp('Invalid mode!');
-            return;
-    end;
-    
     % dimension check
     sizeA = size(A);
     sizeB = size(B);
@@ -105,5 +85,25 @@ function [ output_args ] = ellipsoidalEstimation(mode, precision, tEst, vec1, ve
     end;
     % end of dimension check; sizeX is a size of coordinate space and sizeP
     % is a size of control space
+    
+    %mode check
+    switch mode
+        case {'2d'}
+            tEst = tEst(1);
+            %2d proj func
+            Estimation2d( precision, tEst, vec1, vec2, n, ...
+                A, B, xVec, xMat, pVec, pMat )
+            disp('2d');
+        case {'static3d'}
+            disp('static3d');
+            %static 3d proj func
+        case {'dynamic3d'}
+            disp('dynamic3d');
+            %dynamic 3d 
+        otherwise
+            disp('Invalid mode!');
+            return;
+    end;
+    %end of mode check
 end
 
