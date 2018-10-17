@@ -26,6 +26,7 @@ function [ output_args ] = ellipsoidalEstimation(mode, precision, tEst, vec1, ve
     sizeX = 0;
     sizeP = 0;
     [retVal, vec1, vec2, xVec, pVec, sizeX, sizeP] = dimensionCheck( vec1, vec2, A, B, xVec, xMat, pVec, pMat );
+   % if it failed ? return without continuing
     if (retVal == false)
         return;
     end;

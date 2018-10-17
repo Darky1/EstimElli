@@ -1,10 +1,7 @@
 function [ retVal, vec1, vec2, xVec, pVec, sizeX, sizeP ] = dimensionCheck( vec1, vec2, A, B,...
     xVec, xMat, pVec, pMat )
 %dimensionCheck ? this function performs all the necesarry dimension checks
-% it also returns error messages corresponding to dimension size errors
-% moreover, if everything is okay, then it returns sizes of trajectory and
-% control spaces in sizeX and sizeP respectively
-% and makes all vectors vector-columns
+% it also returns error messages corresponding to dimension size er
     retVal = true;
     sizeA = size(A);
     sizeB = size(B);
