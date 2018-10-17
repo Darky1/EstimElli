@@ -1,4 +1,4 @@
-function [ output_args ] = ellipsoidalEstimation(mode, tEst, vec1, vec2,...
+function [ output_args ] = ellipsoidalEstimation(mode, precision, tEst, vec1, vec2,...
     n, A, B, xVec, xMat, pVec, pMat)
 % Main function that estimate reachability set using inner and outer 
 %   ellipsoids. After that it project set onto plane, dynamic or static.
@@ -12,6 +12,7 @@ function [ output_args ] = ellipsoidalEstimation(mode, tEst, vec1, vec2,...
 %       "dynamic3d" - in this mode a projection of reach tube is builded.
 %       Projection onto  plane (vec1, vec2), changing dynamically so that "good" lines keep being tangent. 
 %       Time interval is [tEst(1), tEst(2)]
+%   precision ? parameter for splitting approximation directions
 %   tEst - estimation time, positive. Can contain 1 or 2 elements.
 %   vec1, vec2 - vectors for projection plane.
 %   n - parameter for splitting time interval for tube modes.
@@ -27,6 +28,8 @@ function [ output_args ] = ellipsoidalEstimation(mode, tEst, vec1, vec2,...
         case {'2d'}
             tEst = tEst(1);
             %2d proj func
+            Estimation2d( precision, tEst, vec1, vec2, n, ...
+                A, B, xVec, xMat, pVec, pMat )
             disp('2d');
         case {'static3d'}
             disp('static3d');
