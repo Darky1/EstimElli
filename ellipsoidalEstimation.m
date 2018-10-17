@@ -40,5 +40,70 @@ function [ output_args ] = ellipsoidalEstimation(mode, precision, tEst, vec1, ve
         otherwise
             disp('Invalid mode!');
             return;
+    end;
+    
+    % dimension check
+    sizeA = size(A);
+    sizeB = size(B);
+    sizeXMat = size(xMat);
+    sizeXVec = size(xVec);
+    sizePMat = size(pMat);
+    sizePVec = size(pVec);
+    % firstly, we have to assume that xVec and pVec are vector-columns
+    if (min(sizeXVec) ~= 1)
+        disp('xVec is not a vector!');
+        return;
+    end;
+    if (min(sizePVec) ~= 1)
+        disp('pVec is not a vector!');
+        return;
+    end;
+    if (sizeXVec(1) == 1)
+        xVec = xVec';
+    end;
+    if (sizePVec(1) == 1)
+        pVec = pVec';
+    end;
+    sizeX = max(sizeXVec);
+    sizeP = max(sizePVec);
+    % matrix check (if square)
+    if (sizeA(1) ~= sizeA(2))
+        disp('A is not square!');
+        return;
+    end;
+    if (sizeXMat(1) ~= sizeXMat(2))
+        disp('xMat is not square!');
+        return;
+    end;
+    if (sizePMat(1) ~= sizePMat(2))
+        disp('pMat is not square!');
+        return;
+    end;
+    % X dimension check
+    if ( sizeX ~= sizeA(1))
+        disp('Sizes of A and xVec do not agree!');
+        return;
+    end;
+    if ( sizeX ~= sizeXMat(1))
+        disp('Sizes of xMat and xVec do not agree!');
+        return;
+    end;
+    % P dimension check
+    if ( sizeP ~= sizePMat(1))
+        disp('Sizes of pMat and pVec do not agree!');
+        return;
+    end;
+    
+    % matrix B dimension check
+    if (sizeB(1) ~= sizeX)
+        disp('Sizes of B and A do not agree!');
+        return;
+    end;
+    if (sizeB(2) ~= sizeP)
+        disp('Sizes of B and pVec do not agree!');
+        return;
+    end;
+    % end of dimension check; sizeX is a size of coordinate space and sizeP
+    % is a size of control space
 end
 
