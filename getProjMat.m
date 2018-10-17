@@ -6,7 +6,9 @@ function [ projMat, transMat ] = getProjMat( vec1, vec2 )
 % orthogonal basis in old basis
 %   usage of transMat: vec_column_in_new = transMat * vec_column_in_old
 %       vec_column_in_old = inv(transMat) * vec_column_in_new
-%   usage of projMat: vec_column_projection = projMat * vec_column_in_old
+%   usage of projMat: vec_column_projection = projMat * vec_column_in_full
+%       vec_column_in_full = inv(transmat) * [vec_column_projection;
+%       zeros(spaceSize - 2, 1)]
     moe = 1e-16; % margin of error
     spaceSize = size(vec1);
     spaceSize = spaceSize(1);
@@ -27,7 +29,7 @@ function [ projMat, transMat ] = getProjMat( vec1, vec2 )
     end;
     transMat(:, ~any(transMat, 1)) = []; % remove clean zeroes
     transMat(:, spaceSize + 1:end) = []; % remove dependant vectors
-    transMat = transMat';
-    projMat = transMat(1:2, :);
+    transMat = transMat'; % a transformation matrix
+    projMat = transMat(1:2, :);% a projection matrix
 end
 
