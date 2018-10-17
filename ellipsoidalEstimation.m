@@ -21,7 +21,6 @@ function [ output_args ] = ellipsoidalEstimation(mode, precision, tEst, vec1, ve
 %       E(xVec, xMat). Make sure that all dimensions are OK.
 %   pVec(t), pMat(t) - equation parameters, determing dynamic ellipsoid 
 %       E(pVec(t), pMat(t)) for control limits.
-%   ellipsoidalEstimation(mode, tEst, vec1, vec2, n, A, B, xVec, xMat, pVec, pMat)    
     % dimension check
     sizeA = size(A);
     sizeB = size(B);
@@ -29,7 +28,9 @@ function [ output_args ] = ellipsoidalEstimation(mode, precision, tEst, vec1, ve
     sizeXVec = size(xVec);
     sizePMat = size(pMat);
     sizePVec = size(pVec);
-    % firstly, we have to assume that xVec and pVec are vector-columns
+    sizeVec1 = size(vec1);
+    sizeVec2 = size(vec2);
+    % firstly, we have to assume that all vectors are vector-columns
     if (min(sizeXVec) ~= 1)
         disp('xVec is not a vector!');
         return;
@@ -38,11 +39,25 @@ function [ output_args ] = ellipsoidalEstimation(mode, precision, tEst, vec1, ve
         disp('pVec is not a vector!');
         return;
     end;
+    if (min(sizeVec1) ~= 1)
+        disp('vec1 is not a vector!');
+        return;
+    end;
+    if (min(sizeVec2) ~= 1)
+        disp('vec2 is not a vector!');
+        return;
+    end;
     if (sizeXVec(1) == 1)
         xVec = xVec';
     end;
     if (sizePVec(1) == 1)
         pVec = pVec';
+    end;
+    if (sizeVec1(1) == 1)
+        vec1 = vec1';
+    end;
+    if (sizeVec2(1) == 1)
+        vec2 = vec2';
     end;
     sizeX = max(sizeXVec);
     sizeP = max(sizePVec);
@@ -83,6 +98,17 @@ function [ output_args ] = ellipsoidalEstimation(mode, precision, tEst, vec1, ve
         disp('Sizes of B and pVec do not agree!');
         return;
     end;
+    
+    % vec1 and vec2 dimension checks
+    if (sizeVec1(1) ~= sizeX)
+        disp('Sizes of vec1 and xVec do not agree!');
+        return;
+    end;
+    if (sizeVec2(1) ~= sizeX)
+        disp('Sizes of vec2 and xVec do not agree!');
+        return;
+    end;
+    
     % end of dimension check; sizeX is a size of coordinate space and sizeP
     % is a size of control space
     
