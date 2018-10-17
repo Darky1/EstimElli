@@ -28,12 +28,8 @@ function [ output_args ] = ellipsoidalEstimation(mode, tEst, vec1, vec2,...
             tEst = tEst(1);
             %2d proj func
             disp('2d');
-        case {'static3d'}
-            disp('static3d');
-            %static 3d proj func
-        case {'dynamic3d'}
-            disp('dynamic3d');
-            %dynamic 3d 
+        case {
+            
         otherwise
             disp('Invalid mode!');
             return;
